@@ -20,11 +20,11 @@ def split_image(image, rows, cols):
             sub_images.append(sub_image)
 
     #下のはテスト
-    for i, sub_image in enumerate(sub_images):
-        cv2.imshow(f'Sub Image {i+1}', sub_image)
+    # for i, sub_image in enumerate(sub_images):
+    #     cv2.imshow(f'Sub Image {i+1}', sub_image)
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     return sub_images
     
