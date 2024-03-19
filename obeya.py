@@ -3,6 +3,8 @@ from utils.contour_utils import find_obeya_contours
 from utils.scoring_utils import calculate_obeya_score
 from utils.ranking_utils import rank_obeya_score
 from utils.display_utils import display_obeya_score
+from utils.split_utils import split_image
+from utils.synthesis_utils import merge_images
 
 img_path = "./sample.jpg"
 target_width = 800
@@ -10,6 +12,21 @@ target_height = 600
 
 # 画像を読み込み、リサイズする
 resized_img = load_and_resize_image(img_path, target_width, target_height)
+
+#画像の分割
+split_images = split_image(resized_img,rows=8,cols=8)
+
+#分割画像のスコア出し
+for sub_image in split_images:
+    # OBEYA 輪郭を検出する
+    sub_contours = find_obeya_contours(sub_image)
+
+    # OBEYA スコアを計算する
+    sub_score = calculate_obeya_score(sub_contours)
+    print(sub_score)
+
+#分割画像を再構築
+image = merge_images(split_images,rows=8,cols=8)
 
 # OBEYA 輪郭を検出する
 obeya_contours = find_obeya_contours(resized_img)
@@ -25,4 +42,4 @@ print("OBEYA スコア:", score)
 print("ランク付け:", rank)
 
 # 画像を表示する
-display_obeya_score(resized_img, obeya_contours, score, rank)
+display_obeya_score(image, obeya_contours, score, rank)
