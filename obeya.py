@@ -1,11 +1,10 @@
-import cv2
-from image_utils import load_and_resize_image
-from contour_utils import find_obeya_contours
-from scoring_utils import calculate_obeya_score
-from ranking_utils import rank_obeya_score
-from display_utils import display_obeya_score
+from utils.image_utils import load_and_resize_image
+from utils.contour_utils import find_obeya_contours
+from utils.scoring_utils import calculate_obeya_score
+from utils.ranking_utils import rank_obeya_score
+from utils.display_utils import display_obeya_score
 
-img_path = "/Users/taketaharashunsuke/Pictures/IMG_7157 2.jpeg"
+img_path = "./sample.jpg"
 target_width = 800
 target_height = 600
 
