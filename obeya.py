@@ -43,3 +43,4 @@ print("ランク付け:", rank)
 
 # 画像を表示する
 display_obeya_score(image, obeya_contours, score, rank)
+
