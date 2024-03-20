@@ -16,7 +16,6 @@ def b64_image(upload_file):
 @app.post('/image/')
 async def response_image(upload_file: UploadFile):
     # Base64エンコードされたファイルデータを取得
-    print(upload_file)
-    result_file = play(upload_file)
-    binary_file = b64_image(result_file)
+
+    binary_file = b64_image(upload_file)
     return {"file":binary_file}
