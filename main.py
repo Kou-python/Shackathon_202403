@@ -1,5 +1,7 @@
-from fastapi import FastAPI,UploadFile,File
+from fastapi import FastAPI,UploadFile
 import base64
+
+from analyze.obeya import play
 
 app = FastAPI()
 
@@ -11,9 +13,10 @@ def b64_image(upload_file):
     # Base64エンコードされたデータを返す
     return binary_file_b64
 
-
 @app.post('/image/')
-async def response_image(upload_file: UploadFile = File(...)):
+async def response_image(upload_file: UploadFile):
     # Base64エンコードされたファイルデータを取得
-    binary_file = b64_image(upload_file)
+    print(upload_file)
+    result_file = play(upload_file)
+    binary_file = b64_image(result_file)
     return {"file":binary_file}
