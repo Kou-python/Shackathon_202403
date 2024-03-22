@@ -1,3 +1,6 @@
+import sys
+sys.path.append("C:/Users/yuuta/OneDrive/デスクトップ/hackason")
+
 from analyze.utils.image_utils import load_and_resize_image
 from analyze.utils.contour_utils import find_obeya_contours
 from analyze.utils.scoring_utils import calculate_obeya_score
@@ -5,6 +8,7 @@ from analyze.utils.ranking_utils import rank_obeya_score
 from analyze.utils.display_utils import display_obeya_score
 from analyze.utils.split_utils import split_image
 from analyze.utils.synthesis_utils import merge_images
+from analyze.utils.base64_utils import b64_image
 
 target_width = 1000
 target_height = 600
@@ -18,6 +22,7 @@ def play(img):
     split_images = split_image(resized_img,rows=8,cols=8)
 
     #分割画像のスコア出し
+    scores_list = []
     for sub_image in split_images:
         # OBEYA 輪郭を検出する
         sub_contours = find_obeya_contours(sub_image)
@@ -25,6 +30,7 @@ def play(img):
         # OBEYA スコアを計算する
         sub_score = calculate_obeya_score(sub_contours)
         print(sub_score)
+        scores_list.append(sub_score)
 
     #分割画像を再構築
     image = merge_images(split_images,rows=8,cols=8)
@@ -45,6 +51,10 @@ def play(img):
     # 画像を表示する
     result = display_obeya_score(image, obeya_contours, score, rank)
 
-    return result
+    #Base64エンコードする
+    b64_result = b64_image(result)
 
-play("./samole.jpg")
+    json = {"image":b64_result,"score":score,"sub_scores":scores_list}
+    print(json)
+
+    return json
