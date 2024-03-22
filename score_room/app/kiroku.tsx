@@ -6,7 +6,7 @@ function Kiroku(props){
     return (
         <div>
             <Tabs variant={"soft-rounded"}>
-                    <TabList>
+                    <TabList justifyContent={"center"}>
                         <Tab>記録一覧</Tab>
                         <Tab>グラフ</Tab>
                     </TabList>

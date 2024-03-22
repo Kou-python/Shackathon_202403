@@ -6,8 +6,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 function MenuBar(){
     return(
-        <Box maxWidth={400} h={"30px"}>
-            <Box float={"right"} mx={2}>
+        <Box maxWidth={380} h={"30px"}>
+            <Box float={"right"} mx={5}>
                 <Menu>
                     <MenuButton>
                         <GiHamburgerMenu size={30}/>

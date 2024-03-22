@@ -4,7 +4,7 @@ import Post from "./components/post";
 export default function Rireki(props){
     return (
         <Box m={0} p={0}>
-            {props.PostData.map((name, index)=>(
+            {props.PostData.slice().reverse().map((name, index)=>(
             <Post PostDataThis = {name} key= {index}/>
             ))}
         </Box>
