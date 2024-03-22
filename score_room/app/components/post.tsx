@@ -3,14 +3,15 @@ import { Box, Image, Card, CardHeader, CardBody} from "@chakra-ui/react";
 import getBadgeFromScore from "./getBadgeFromScore";
 
 function Post(props){
+    const PostData_this = props.PostDataThis
     return(            
     <Card m = {"10px auto"} maxW={350} p={1} minH={150}>
-        <CardHeader p={2}>{props.date}</CardHeader>
+        <CardHeader p={2}>{PostData_this.date}</CardHeader>
         <CardBody display={"flex"} pt={1} paddingRight={"0px"}>
             {/* 画像 */}
-            <Image src={props.imgpath} width={"80%"} borderRadius={5}></Image>
+            <Image src={PostData_this.imgpath} width={"80%"} borderRadius={5}></Image>
             {/* スコアとバッジ */}
-            <ShowScore  score = {props.score}/>
+            <ShowScore  score = {PostData_this.score}/>
         </CardBody>
     </Card>
     )
