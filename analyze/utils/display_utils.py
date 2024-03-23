@@ -15,6 +15,11 @@ def display_obeya_score(resized_img, obeya_contours, score, rank):
     for contour in obeya_contours:
         cv2.drawContours(score_frame, [contour], -1, GREEN, 3)
 
-    cv2.putText(score_frame, ' '.join([str(score), rank]), SCORE_AP, FONT, SCORE_FONT_SIZE, BLUE, SCORE_FONT_WEIGHT, cv2.LINE_AA)
+    # cv2.putText(score_frame, ' '.join([str(score), rank]), SCORE_AP, FONT, SCORE_FONT_SIZE, BLUE, SCORE_FONT_WEIGHT, cv2.LINE_AA)
+
+    # 画像を表示
+    # cv2.imshow('OBEYA Score', score_frame)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     return score_frame
