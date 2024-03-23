@@ -1,4 +1,5 @@
 from fastapi import FastAPI,UploadFile
+
 from fastapi.middleware.cors import CORSMiddleware
 
 from pymongo import MongoClient
@@ -8,6 +9,7 @@ import os
 from analyze.obeya import play
 
 app = FastAPI()
+
 
 load_dotenv()
 uri = os.getenv("MONGO_URL")
@@ -23,15 +25,23 @@ app.add_middleware(
     allow_headers=["*"],  # すべてのヘッダーを許可
 )
 
+
+
 @app.get('/')
 async def root():
     return {"message":"Hello World"}
 
 @app.post('/image/')
+
 async def response_image(sample:str):
+
+
+
     # Base64エンコードされたファイルデータを取得
 
     image = "./analyze/sample.jpg"
     result = play(image)
+
     collection1.insert_one(result)
+
     return result
