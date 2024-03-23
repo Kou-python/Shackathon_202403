@@ -1,18 +1,16 @@
-import { useState } from "react";
+import React, { Component } from "react";
+import { render } from "react-dom";
 
-function Upload() {
-  const [file, setFile] = useState<File | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-    }
+const App = () => {
+  const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
   };
 
   return (
     <div>
-      <input type="file" onChange={handleChange} />
-      {file && <p>{file.name}</p>}
+      <input type="file" onChange={onFileInputChange} />
     </div>
   );
-}
+};
+
+render(<App />, document.getElementById("root"));

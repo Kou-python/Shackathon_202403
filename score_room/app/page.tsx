@@ -1,31 +1,92 @@
-// import MenuBar from "./components/menubar";
-import { ChakraProvider, Box } from "@chakra-ui/react";
-// import Kiroku from "./kiroku";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+"use client";
+import { Container, FormLabel, Heading, Image, Input } from "@chakra-ui/react";
+import type { NextPage } from "next";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react"; //カルーセル用のタグをインポート
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation"; // スタイルをインポート
+import "swiper/css/pagination"; // スタイルをインポート
 
-export default function Page() {
-  const PostData = [
-    {
-      imgpath: "/SampleImages/Sample3.png",
-      score: 50,
-      date: "2024-3-9(土) 19:50",
-    },
-    {
-      imgpath: "/SampleImages/Sample2.png",
-      score: 0,
-      date: "2024-3-11(月) 14:18",
-    },
-    {
-      imgpath: "/SampleImages/Sample1.png",
-      score: 65,
-      date: "2024-3-13(水) 20:15",
-    },
-  ];
+const Home: NextPage = () => {
+  const [images, setImages] = useState<Blob[]>([]);
+  const inputNameRef = useRef<HTMLInputElement>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
+  // 以下送信処理
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("送信");
+
+    const name = inputNameRef.current?.value;
+
+    const formData = new FormData();
+
+    for await (const [i, v] of Object.entries(images)) {
+      formData.append("files", v);
+    }
+    formData.append("name", name || "");
+
+    const post = await fetch(`${window.location.href}api/upload`, {
+      method: "POST",
+      body: formData,
+    });
+
+    console.log(await post.json());
+  };
+
+  const handleOnAddImage = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    setImages([...e.target.files]);
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-2">
-      <ChakraProvider>
-        <Button colorScheme="green">アップロード</Button>
-      </ChakraProvider>
-    </main>
+    <Container pt="10">
+      <Heading>Image Form</Heading>
+      <form onSubmit={onSubmit} encType="multipart/form-data">
+        <FormLabel htmlFor="postName">名前</FormLabel>
+        <Input
+          type="text"
+          id="postName"
+          placeholder="Name"
+          size="lg"
+          ref={inputNameRef}
+        />
+        <FormLabel htmlFor="postImages">画像</FormLabel>
+        <Input
+          type="file"
+          id="postImages"
+          multiple
+          accept="image/*,.png,.jpg,.jpeg,.gif"
+          onChange={handleOnAddImage}
+          ref={inputFileRef}
+        />
+        <Input type="submit" value="送信" margin="10px auto" variant="filled" />
+      </form>
+      <Container>
+        <Swiper
+          slidesPerView={1} //一度に表示するスライドの数
+          modules={[Navigation, Pagination]}
+          pagination={{
+            clickable: true,
+          }} //　何枚目のスライドかを示すアイコン、スライドの下の方にある
+          navigation //スライドを前後させるためのボタン、スライドの左右にある
+          loop={true}
+        >
+          {images.map((image, i) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={URL.createObjectURL(image)}
+                w="full"
+                h="40vw"
+                objectFit="cover"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+    </Container>
   );
-}
+};
+
+export default Home;

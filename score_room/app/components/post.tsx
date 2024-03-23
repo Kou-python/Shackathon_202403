@@ -4,7 +4,7 @@ import getBadgeFromScore from "./getBadgeFromScore";
 
 function Post(props){
     const PostData_this = props.PostDataThis
-    return(            
+    return(
     <Card m = {"10px auto"} maxW={350} p={1} minH={150}>
         <CardHeader p={2}>{PostData_this.date}</CardHeader>
         <CardBody display={"flex"} pt={1} paddingRight={"0px"}>
@@ -20,7 +20,7 @@ function Post(props){
 function ShowScore(props){
     // バッジごとの色を設定
     const badge = getBadgeFromScore(props.score)
-    
+
     return (
         <Box display={"flex"} alignItems={"flex-end"} justifyContent={"center"} width={"20%"}>
         <Box height = {100}>
@@ -35,7 +35,7 @@ function ShowScore(props){
                 </Box>
             </Box>
             </Box>
-    </Box>          
+    </Box>
     )
 }
 
