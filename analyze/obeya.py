@@ -1,5 +1,5 @@
-import sys
-sys.path.append("C:/Users/yuuta/OneDrive/デスクトップ/hackason")
+# import sys
+# sys.path.append("C:/Users/yuuta/OneDrive/デスクトップ/hackason")
 
 from analyze.utils.image_utils import load_and_resize_image
 from analyze.utils.contour_utils import find_obeya_contours
@@ -65,6 +65,6 @@ def play(img):
     #Base64エンコードする
     b64_result = b64_image(result)
 
-    json = {"image":b64_result,"score":score,"sub_scores":scores_list}
+    json = {"score":score,"sub_scores":scores_list}
 
-    return json
+    return jsonhttps://github.com/Kou-python/Shackathon_202403.git

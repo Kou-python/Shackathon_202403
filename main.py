@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import os
 
 from analyze.obeya import play
+from read_file import read
 
 app = FastAPI()
 
@@ -33,14 +34,14 @@ async def root():
 
 @app.post('/upload/')
 async def response_image(upload_file:UploadFile):
-    print(upload_file)
 
-
+    image = await read(upload_file)
     # Base64エンコードされたファイルデータを取得
+    print(image)
 
-    image = "./analyze/sample.jpg"
     result = play(image)
-    data = collection1.insert_one({"score":result["score"],"sub_scores":result["sub_scores"]})
+    # data = collection1.insert_one({"score":result["score"],"sub_scores":result["sub_scores"]})
+    # print(result)
+    # result.pop('_id', None)  # '_id'フィールド（ObjectId）を削除
     print(result)
-    result.pop('_id', None)  # '_id'フィールド（ObjectId）を削除
     return result
