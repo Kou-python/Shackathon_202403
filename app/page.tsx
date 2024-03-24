@@ -23,10 +23,7 @@ async function hoge(event: FormEvent<HTMLFormElement>) {
     method: 'POST',
     body: formDataToSend,
   });
-
-  // サーバーからの応答を取得
-  const data = await res.json();
-  console.log("Response from server:", data);
+  console.log(res)
 
   // 応答から画像ファイルの中身を取得する場合は、サーバー側で処理してから返す必要があります
 }
