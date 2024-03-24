@@ -40,8 +40,10 @@ async def response_image(upload_file:UploadFile):
     print(image)
 
     result = play(image)
-    # data = collection1.insert_one({"score":result["score"],"sub_scores":result["sub_scores"]})
-    # print(result)
-    # result.pop('_id', None)  # '_id'フィールド（ObjectId）を削除
-    print(result)
+    recent_data = collection1.find_one(sort=[('_id', -1)])
+    data = recent_data["scoore"]
+    print(recent_data)
+
+    collection1.insert_one({"score":result["score"],"sub_scores":result["sub_scores"]})
+    result.pop('_id', None)  # '_id'フィールド（ObjectId）を削除
     return result

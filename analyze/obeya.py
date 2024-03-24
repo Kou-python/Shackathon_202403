@@ -65,6 +65,6 @@ def play(img):
     #Base64エンコードする
     b64_result = b64_image(result)
 
-    json = {"score":score,"sub_scores":scores_list}
+    json = {"image":b64_result,"score":score,"sub_scores":scores_list}
 
     return json
