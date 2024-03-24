@@ -39,7 +39,6 @@ def play(img):
 
         #分割画像のlist
         scores_list.append(sub_score)
-        print(scores_list)
 
         #OBEYA部分の表示
         color_images.append(score_and_color(sub_image,sub_score))

@@ -31,17 +31,16 @@ app.add_middleware(
 async def root():
     return {"message":"Hello World"}
 
-@app.post('/image/')
-
-async def response_image(sample:str):
-
+@app.post('/upload/')
+async def response_image(upload_file:UploadFile):
+    print(upload_file)
 
 
     # Base64エンコードされたファイルデータを取得
 
     image = "./analyze/sample.jpg"
     result = play(image)
-
-    collection1.insert_one(result)
-
+    data = collection1.insert_one({"score":result["score"],"sub_scores":result["sub_scores"]})
+    print(result)
+    result.pop('_id', None)  # '_id'フィールド（ObjectId）を削除
     return result
