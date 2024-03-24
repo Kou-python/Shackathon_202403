@@ -1,5 +1,5 @@
 "use client";
-import { Container, FormLabel, Heading, Image, Input } from "@chakra-ui/react";
+import { Button, Container, FormLabel, Heading, Image, Input } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react"; //カルーセル用のタグをインポート
@@ -44,14 +44,6 @@ const Home: NextPage = () => {
     <Container pt="10">
       <Heading>Image Form</Heading>
       <form onSubmit={onSubmit} encType="multipart/form-data">
-        <FormLabel htmlFor="postName">名前</FormLabel>
-        <Input
-          type="text"
-          id="postName"
-          placeholder="Name"
-          size="lg"
-          ref={inputNameRef}
-        />
         <FormLabel htmlFor="postImages">画像</FormLabel>
         <Input
           type="file"
@@ -61,7 +53,14 @@ const Home: NextPage = () => {
           onChange={handleOnAddImage}
           ref={inputFileRef}
         />
-        <Input type="submit" value="送信" margin="10px auto" variant="filled" />
+        <Button>
+          <Input
+            type="submit"
+            value="送信"
+            margin="10px auto"
+            variant="filled"
+          />
+        </Button>
       </form>
       <Container>
         <Swiper
