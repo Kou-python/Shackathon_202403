@@ -67,4 +67,4 @@ def play(img):
 
     json = {"score":score,"sub_scores":scores_list}
 
-    return jsonhttps://github.com/Kou-python/Shackathon_202403.git
+    return json
